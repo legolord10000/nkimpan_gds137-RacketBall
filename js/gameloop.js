@@ -59,13 +59,13 @@ function animate()
         }
         if (player.y > canvas.height - player.height/2)
         {
-            player.vy=-4
+            //splayer.vy=-4
             //player.color = "#00ff00"
             player.y = canvas.height -player.height/2
         }
         else if (player.y < player.height/2)
         {
-            player.vy=4
+            //player.vy=4
             //player.color = "#ff0000" 
             player.y = player.height/2
         }
