@@ -10,11 +10,11 @@ context = canvas.getContext("2d");
 
 player = new GameObject(1,canvas.height/2,5,100,"#6200ff");
 player.vx=0;
-player.vy=-4;
+player.vy=0;
 
 npc0 = new GameObject(canvas.width/2,canvas.height/2,100,100,"#6200ff");
-npc0.vx=4;
-npc0.vy=-4;
+npc0.vx=-4;
+npc0.vy=0;
 
 npc1 = new GameObject(300,canvas.height/2,100,100,"#00ff00")
 npc2 = new GameObject(600,canvas.height/2,100,100,"#0000ff")
@@ -37,11 +37,11 @@ function animate()
     }
     if (w)
     {
-        player.y += 4
+        player.y += 8
     }
     if (s)
     {
-        player.y -= 4
+        player.y -= 8
     }
 
     player.move();
@@ -72,27 +72,18 @@ function animate()
         
        // npc0 collision
        npc0.move();
-        if (npc0.x > canvas.width -npc0.width/2)
+        if (npc0.collisionCheck(player))
         {
-              npc0.vx=-4
-            //npc0.color = "#ffff00"
+            npc0.vx = -npc0.vx;
+            npc0.x = player.right() + npc0.width/2;
+            npc0.color = "#ff8800";
         }
-        else if (npc0.x < npc0.width/2)
+        else if (npc0.x > canvas.width - npc0.width/2)
         {
-              npc0.vx=4
-            //npc0.color = "#0000ff"
+            npc0.vx = -npc0.vx;
+            npc0.x = canvas.width - npc0.width/2;
+            npc0.color = "#6200ff";
         }
-        if (npc0.y > canvas.height -npc0.height/2)
-        {
-              npc0.vy=-4
-            //npc0.color = "#00ff00"
-        }
-        else if (npc0.y < npc0.height/2)
-        {
-              npc0.vy=4
-            //npc0.color = "#ff0000" 
-        }
-        
         
        // NPC1 collision
     if (npc1.collisionCheck(player))
@@ -124,6 +115,10 @@ function animate()
     //npc1.drawCircle();  
     //npc2.drawCircle();  
     //npc3.drawRect();  
+    //player.drawRegistrationPoint();
+    //npc0.drawRegistrationPoint();
+
+
 
 }
 
